@@ -64,7 +64,13 @@ EOF
 fi
 
 echo "Deploying template..."
-deploymentOutput=$(az deployment group create --name "$deploymentName" --resource-group "$resourceGroupName" --template-file "$templateFile" --output json)
+
+# deploymentOutput=$(az deployment group create --name "$deploymentName" \
+# --resource-group "$resourceGroupName" \
+# --template-file "$templateFile" \
+# --output json)
+
+deploymentOutput=$(az deployment group create --name "$deploymentName" --resource-group "$resourceGroupName" --template-file "$templateFile" --parameters storageName={new-unique-name} --output json)
 provisioningState=$(echo "$deploymentOutput" | jq -r '.properties.provisioningState')
 
 if [[ "$provisioningState" == "Succeeded" ]]; then
