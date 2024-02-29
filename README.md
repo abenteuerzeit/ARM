@@ -40,3 +40,4 @@ List azure locations:
 ```bash
 az account list-locations --query "[].{DisplayName:displayName, Name:name}" -o table
 ```
+
